@@ -23,21 +23,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Static site checks
+        if: hashFiles('package.json') == ''
+        shell: bash
+        run: |
+          if [ ! -f index.html ]; then
+            echo "::error::No package.json and no index.html found. Nothing to deploy."
+            exit 1
+          fi
+          echo "No package.json detected; treating this as a static site."
+          npx --yes html-validate index.html
+
       - name: Setup Node.js
+        if: hashFiles('package.json') != ''
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Require package manifest
-        shell: bash
-        run: |
-          if [ ! -f package.json ]; then
-            echo "::error::package.json is missing. Add the app before relying on CI."
-            exit 1
-          fi
-
       - name: Detect package manager
+        if: hashFiles('package.json') != ''
         id: pm
         shell: bash
         run: |
@@ -53,6 +58,7 @@ jobs:
           fi
 
       - name: Install dependencies
+        if: hashFiles('package.json') != ''
         shell: bash
         run: |
           case "${{ steps.pm.outputs.manager }}" in
@@ -74,12 +80,14 @@ jobs:
           esac
 
       - name: Lint
+        if: hashFiles('package.json') != ''
         shell: bash
         run: |
           node -e "const pkg=require('./package.json'); if(!pkg.scripts||!pkg.scripts.lint){console.error('Missing lint script in package.json'); process.exit(1)}"
           npm run lint
 
       - name: Test
+        if: hashFiles('package.json') != ''
         shell: bash
         run: |
           if node -e "const pkg=require('./package.json'); process.exit(pkg.scripts&&pkg.scripts.test ? 0 : 1)"; then
@@ -89,6 +97,7 @@ jobs:
           fi
 
       - name: Build
+        if: hashFiles('package.json') != ''
         shell: bash
         run: |
           node -e "const pkg=require('./package.json'); if(!pkg.scripts||!pkg.scripts.build){console.error('Missing build script in package.json'); process.exit(1)}"

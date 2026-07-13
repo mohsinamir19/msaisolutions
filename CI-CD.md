@@ -2,7 +2,7 @@
 
 ## Current status
 
-This repository was initialized without application source files, so the exact framework, build output directory, and required environment variables cannot be inferred yet. The pipeline scaffold in this repo is intentionally strict about missing app files so it fails loudly instead of pretending a deployment is ready.
+The site is currently a static `index.html` "coming soon" page with no build tooling. CI runs an HTML validation check instead of a package.json-based build. Once a real framework (Next.js, Vite, etc.) is introduced, add `package.json` with `lint`/`test`/`build` scripts and a lockfile — CI will automatically switch to the Node-based pipeline.
 
 ## Branch strategy
 
@@ -58,10 +58,15 @@ At the moment, the repo does not contain app source, so only a placeholder varia
 
 ## Vercel setup notes
 
-When the app exists, confirm the following in Vercel:
+Connect Vercel using its native GitHub integration (no GitHub Actions secrets needed for deploys):
 
-- Framework preset is auto-detected correctly.
-- Build command matches the app's package scripts.
-- Output directory matches the framework's production output.
-- `main` is the production branch.
-- `dev` is the staging branch.
+1. In the Vercel dashboard, "Add New Project" → Import the GitHub repo.
+2. Framework preset: "Other" (static site) until a framework is added — Vercel will serve `index.html` as-is.
+3. Set the Production Branch to `main` in Project Settings → Git.
+4. Vercel automatically deploys:
+   - Every push to `main` → production deployment.
+   - Every push to `dev` and every PR → preview deployment.
+5. Once a real framework exists, confirm:
+   - Framework preset is auto-detected correctly.
+   - Build command matches the app's package scripts.
+   - Output directory matches the framework's production output.
