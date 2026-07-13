@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="MS AI Solutions is coming soon." />
+    <title>MS AI Solutions - Coming Soon</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07111f;
+        --bg-soft: #0c1a2e;
+        --panel: rgba(10, 20, 36, 0.78);
+        --panel-border: rgba(255, 255, 255, 0.08);
+        --text: #f4f7fb;
+        --muted: #b8c4d6;
+        --accent: #6de2ff;
+        --accent-2: #7ef0c2;
+        --shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(109, 226, 255, 0.16), transparent 32%),
+          radial-gradient(circle at bottom right, rgba(126, 240, 194, 0.14), transparent 28%),
+          linear-gradient(160deg, var(--bg), var(--bg-soft));
+        color: var(--text);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        overflow: hidden;
+      }
+
+      .shell {
+        width: min(960px, 100%);
+        display: grid;
+        gap: 24px;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: stretch;
+      }
+
+      .hero,
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+        border-radius: 28px;
+      }
+
+      .hero {
+        padding: clamp(28px, 5vw, 56px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 0 20px rgba(109, 226, 255, 0.9);
+      }
+
+      h1 {
+        margin: 22px 0 14px;
+        font-size: clamp(3rem, 10vw, 6.2rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+        max-width: 8ch;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 1.04rem;
+        max-width: 36rem;
+      }
+
+      .accent {
+        color: var(--accent);
+      }
+
+      .meta {
+        display: grid;
+        gap: 16px;
+        margin-top: 34px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .meta div {
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .meta span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+      }
+
+      .meta strong {
+        font-size: 1.02rem;
+        font-weight: 600;
+      }
+
+      .card {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 22px;
+      }
+
+      .logo {
+        width: 74px;
+        height: 74px;
+        border-radius: 22px;
+        display: grid;
+        place-items: center;
+        font-size: 1.45rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        background: linear-gradient(145deg, rgba(109, 226, 255, 0.16), rgba(126, 240, 194, 0.14));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .contact {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .contact strong {
+        font-size: 1rem;
+      }
+
+      .contact a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .contact a:hover {
+        color: var(--accent);
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .pulse {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #7ef0c2;
+        box-shadow: 0 0 0 0 rgba(126, 240, 194, 0.6);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(126, 240, 194, 0.6);
+        }
+        70% {
+          box-shadow: 0 0 0 14px rgba(126, 240, 194, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(126, 240, 194, 0);
+        }
+      }
+
+      @media (max-width: 820px) {
+        .shell {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell" aria-label="MS AI Solutions coming soon page">
+      <section class="hero">
+        <div class="eyebrow"><span class="dot"></span> MS AI Solutions</div>
+        <h1>Coming <span class="accent">Soon</span>.</h1>
+        <p>
+          We are building a focused AI consulting and solutions studio for practical,
+          real-world outcomes. The full site is on the way.
+        </p>
+        <div class="meta" aria-label="Project details">
+          <div>
+            <span>Launch status</span>
+            <strong>Preparing the first release</strong>
+          </div>
+          <div>
+            <span>What to expect</span>
+            <strong>AI strategy, automation, and delivery</strong>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="stack">
+          <div class="logo" aria-label="MS AI Solutions logo">MS</div>
+          <div class="tag">A better way to build with AI</div>
+          <div class="status"><span class="pulse"></span> Site coming online soon</div>
+        </div>
+
+        <div class="contact">
+          <strong>Get in touch</strong>
+          <a href="mailto:hello@msaisolutions.com">hello@msaisolutions.com</a>
+          <span style="color: var(--muted); line-height: 1.6;">For business inquiries, partnerships, or launch updates.</span>
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>
